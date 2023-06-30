@@ -41,7 +41,7 @@ class AMenu : Menu {
             if (scan.hasNextInt()) {
                 val userInput = scan.nextInt()
                 if ((userInput > menuForArchive.size - 1) || (userInput < 0)) {
-                    println("Необходимо ввести число соответствующее пункту меню\n")
+                    println("Необходимо ввести число соответствующее пункту меню")
                 }
                 when (userInput) {
                     0 -> addToMenu()
