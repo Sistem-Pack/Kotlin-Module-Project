@@ -1,7 +1,7 @@
-import Archives.AMenu
+import archives.ArchiveMenu
 
 fun main() {
-    val myArchive = AMenu()
+    val myArchive = ArchiveMenu()
     myArchive.showAllArchivesMenu()
 }
 

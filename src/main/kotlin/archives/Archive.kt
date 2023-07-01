@@ -1,8 +1,8 @@
-package Archives
+package archives
 
-import Notes.Notes
+import notes.Notes
 
-class Archive(
+data class Archive(
     val name: String,
     var listForNotes: MutableList<Notes>
 )

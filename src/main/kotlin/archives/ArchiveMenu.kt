@@ -1,14 +1,15 @@
-package Archives
+package archives
 
 import Menu
-import Notes.NMenu
-import Notes.Notes
+import notes.NotesMenu
+import notes.Notes
 import java.util.Scanner
 import kotlin.system.exitProcess
 
 
-class AMenu : Menu {
+class ArchiveMenu : Menu {
     private val scan: Scanner = Scanner(System.`in`)
+    private val notesMenu = NotesMenu()
     private val menuForArchive: MutableList<Archive> = mutableListOf(
         Archive("Создать архив", mutableListOf()),
         Archive("Выход", mutableListOf())
@@ -33,27 +34,26 @@ class AMenu : Menu {
         }
     }
 
-    private val notesMenu = NMenu()
-
     fun showAllArchivesMenu(): MutableList<Notes> {
+        val errorMessageInput = "Необходимо ввести число соответствующее пункту меню"
         while (true) {
             showMenu()
             if (scan.hasNextInt()) {
                 val userInput = scan.nextInt()
-                if ((userInput > menuForArchive.size - 1) || (userInput < 0)) {
-                    println("Необходимо ввести число соответствующее пункту меню")
-                }
-                when (userInput) {
-                    0 -> addToMenu()
-                    menuForArchive.size - 1 -> exitProcess(0)
-                    else -> notesMenu.addToNotesMenu(menuForArchive[userInput].listForNotes)
+                if ((userInput > menuForArchive.lastIndex) || (userInput < 0)) {
+                    println(errorMessageInput)
+                } else {
+                    when (userInput) {
+                        0 -> addToMenu()
+                        menuForArchive.lastIndex -> exitProcess(0)
+                        else -> notesMenu.addToNotesMenu(menuForArchive[userInput].listForNotes)
+                    }
                 }
             } else {
                 if (scan.nextLine().isNotEmpty()) {
-                    println("Необходимо ввести число соответствующее пункту меню")
+                    println(errorMessageInput)
                 }
             }
-            continue
         }
     }
 }

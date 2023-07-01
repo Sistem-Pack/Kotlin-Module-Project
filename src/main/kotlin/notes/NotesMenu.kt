@@ -1,8 +1,8 @@
-package Notes
+package notes
 
 import java.util.*
 
-class NMenu {
+class NotesMenu {
 
     private val scan = Scanner(System.`in`)
 
@@ -30,27 +30,28 @@ class NMenu {
             notesMenu.add(Notes("Добавить заметку", ""))
             notesMenu.add(Notes("Выход", ""))
         }
+        val errorMessageInput = "Необходимо ввести число соответствующее пункту меню"
         while (true) {
             showAllNotes(notesMenu)
             if (scan.hasNextInt()) {
                 val userInput = scan.nextInt()
-                if ((userInput > notesMenu.size - 1) || (userInput < 0)) {
-                    print("Необходимо ввести число соответствующее пункту меню")
-                }
-                when (userInput) {
-                    0 -> addToNotes(notesMenu)
-                    notesMenu.size - 1 -> return
-                    else -> {
-                        println("Текст заметки: ")
-                        println(notesMenu[userInput].textNote)
+                if ((userInput > notesMenu.lastIndex) || (userInput < 0)) {
+                    print(errorMessageInput)
+                } else {
+                    when (userInput) {
+                        0 -> addToNotes(notesMenu)
+                        notesMenu.size - 1 -> return
+                        else -> {
+                            println("Текст заметки: ")
+                            println(notesMenu[userInput].textNote)
+                        }
                     }
                 }
             } else {
                 if (scan.nextLine().isNotEmpty()) {
-                    println("Необходимо ввести число соответствующее пункту меню")
+                    println(errorMessageInput)
                 }
             }
-            continue
         }
     }
 }

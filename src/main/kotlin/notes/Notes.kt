@@ -1,6 +1,6 @@
-package Notes
+package notes
 
-class Notes(
+data class Notes(
     val name: String,
     val textNote: String
 )
